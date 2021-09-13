@@ -1,0 +1,76 @@
+.aluno {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5rem;
+  align-items: center;
+}
+
+.aluno__title {
+  align-items: center;
+  justify-content: center;
+}
+
+.aluno__table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem;
+}
+
+.aluno__table td, .aluno__table th {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.aluno__table tr:nth-child(even){
+  background-color: #f0f0f5;
+}
+
+.aluno__table tr:hover {
+  background-color: #ddd;
+}
+
+.aluno__table th {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.aluno__table .aluno__table__id {
+  width: 10%;
+}
+
+.aluno__table .aluno__table__nome {
+  width: 35%;
+}
+
+.aluno__table .aluno__table__email {
+  width: 30%;
+}
+
+.aluno__table .aluno__table__cpf {
+  width: 15%;
+}
+
+.aluno__table .aluno__table__acoes {
+  width: 10%;
+}
+
+.cell-action {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn-action {
+  background-color: var(--primary-color);
+  border: 1px solid var(--title-color)
+}
+
+.input__pesquisa {
+  padding: 0.5rem;
+  width: 35%;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid var(--title-color);
+}
