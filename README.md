@@ -24,6 +24,8 @@ $ cd alunos-web
 
 # construa e inicie seu container
 $ docker-compose up --build
+
+Rodando na porta 80
 ```
 
 ## Testes
