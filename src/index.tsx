@@ -4,11 +4,11 @@ import App from './App';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:8000/graphql'
-})
+  uri: 'http://localhost:8000/graphql',
+});
 
 const client = new ApolloClient({
   link: httpLink,
@@ -22,13 +22,13 @@ const client = new ApolloClient({
                 __typename: 'GetAlunos',
                 id: args?.id,
               });
-            }
-          }
-        }
-      }
-    }
-  })
-})
+            },
+          },
+        },
+      },
+    },
+  }),
+});
 
 ReactDOM.render(
   <React.StrictMode>
@@ -36,5 +36,5 @@ ReactDOM.render(
       <App />
     </ApolloProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

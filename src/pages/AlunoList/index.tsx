@@ -1,89 +1,92 @@
 import React, { ChangeEvent, useState } from 'react';
-import { useQuery, gql, useMutation } from '@apollo/client'
+import { useQuery, gql, useMutation } from '@apollo/client';
 
 import { useHistory } from 'react-router-dom';
-import { FaPen, FaTimes } from 'react-icons/fa'
+import { FaPen, FaTimes } from 'react-icons/fa';
 
 import { Button, Table, Spinner, Card, Form } from 'react-bootstrap';
 
-import { Aluno } from '../../entities/Aluno'
+import { Aluno } from '../../entities/Aluno';
 
 import './styles.css';
 
 interface AlunosQueryData {
-  alunos: Aluno[]
+  alunos: Aluno[];
 }
 
 const ALUNOS_QUERY = gql`
   query GetAlunos($busca: String) {
     alunos(busca: $busca) {
-      id,
-      nome,
-      email,
+      id
+      nome
+      email
       cpf
     }
   }
-`
+`;
 
 const REMOVER_ALUNO_MUTATION = gql`
   mutation RemoverAluno($id: Int!) {
     removerAluno(id: $id) {
-      nome,
-      email,
+      nome
+      email
       cpf
     }
   }
-`
+`;
 
 export const AlunoList = () => {
-  const [ busca, setBusca ] = useState<string>('')
+  const [busca, setBusca] = useState<string>('');
 
-  const { data } = useQuery<AlunosQueryData>(ALUNOS_QUERY, { variables: { busca } })
-  const [ removerAluno, { loading: isDeleting } ] = useMutation(REMOVER_ALUNO_MUTATION, {
-    refetchQueries: [ALUNOS_QUERY, 'GetAlunos']
-  })
+  const { data } = useQuery<AlunosQueryData>(ALUNOS_QUERY, { variables: { busca } });
+  const [removerAluno, { loading: isDeleting }] = useMutation(REMOVER_ALUNO_MUTATION, {
+    refetchQueries: [ALUNOS_QUERY, 'GetAlunos'],
+  });
 
   let history = useHistory();
 
   const redirectForm = (id?: number) => {
-    const path = id ? `/form/${id}` : '/form'
-    history.push(path)
-  }
+    const path = id ? `/form/${id}` : '/form';
+    history.push(path);
+  };
 
   const onBuscaInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target
-    setBusca(value)
-  }
+    const { value } = event.target;
+    setBusca(value);
+  };
 
   const onDeleteClick = (aluno: Aluno) => {
-    removerAluno({ variables: { id: aluno.id } })
-  }
-  
+    removerAluno({ variables: { id: aluno.id } });
+  };
+
   const onEditClick = (aluno: Aluno) => {
-    redirectForm(aluno.id)
-  }
+    redirectForm(aluno.id);
+  };
 
   const onAddClick = () => {
-    redirectForm()
-  }
+    redirectForm();
+  };
 
   return (
     <Card className="aluno__list">
       <Card.Header className="w-100 d-flex flex-row align-items-baseline justify-content-between">
         <Card.Title>Listagem de Alunos</Card.Title>
-        <Button variant="primary" size="sm" onClick={onAddClick}>Novo Aluno</Button>
+        <Button variant="primary" size="sm" onClick={onAddClick}>
+          Novo Aluno
+        </Button>
       </Card.Header>
       <Card.Header className="w-100">
-          <Form.Control 
-            id="busca"
-            name="busca" 
-            type="text" 
-            placeholder="Pesquise por nome, email ou cpf"
-            className="text-center form-control"
-            onChange={onBuscaInputChange}/>
+        <Form.Control
+          id="busca"
+          name="busca"
+          type="text"
+          placeholder="Pesquise por nome, email ou cpf"
+          className="text-center form-control"
+          onChange={onBuscaInputChange}
+        />
       </Card.Header>
       <Card.Body className="aluno__table__container">
-          <Table bordered striped hover>
+        <Table bordered striped hover>
           <thead>
             <tr>
               <th className="w-10">ID</th>
@@ -94,8 +97,8 @@ export const AlunoList = () => {
             </tr>
           </thead>
           <tbody>
-            {
-              data && data.alunos.map((aluno: Aluno) => (
+            {data &&
+              data.alunos.map((aluno: Aluno) => (
                 <tr key={aluno.id} className="align-middle">
                   <td>{aluno.id}</td>
                   <td>{aluno.nome}</td>
@@ -103,28 +106,21 @@ export const AlunoList = () => {
                   <td>{aluno.cpf}</td>
                   <td className="d-flex justify-content-evenly">
                     <Button variant="danger" size="sm" disabled={isDeleting} onClick={() => onDeleteClick(aluno)}>
-                      { isDeleting ? (
-                        <Spinner
-                          as="span"
-                          animation="border"
-                          size="sm"
-                          role="status"
-                          aria-hidden="true"
-                        />
-                      ) : ( 
-                        <FaTimes color="white" /> 
+                      {isDeleting ? (
+                        <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                      ) : (
+                        <FaTimes color="white" />
                       )}
                     </Button>
                     <Button variant="primary" size="sm" onClick={() => onEditClick(aluno)}>
-                      <FaPen color="white"/>
+                      <FaPen color="white" />
                     </Button>
                   </td>
                 </tr>
-              ))
-            }
+              ))}
           </tbody>
         </Table>
       </Card.Body>
     </Card>
-  )
-}
+  );
+};
