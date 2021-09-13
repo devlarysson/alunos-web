@@ -1,33 +1,12 @@
-:root {
-  --primary-color: #34cb79;
-  --title-color: #322153;
-  --text-color: #6c6c80;
-}
-
-html {
+html, body, #root {
   height: 100%;
-}
-
-body {
-  color: var(--text-color);
-  height: 100%;
-}
-
-body,
-input,
-button {
-  font-family: Ubuntu;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--title-color);
 }
 
 #root {
-  height: 100%;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5rem;
+  overflow: hidden;
 }

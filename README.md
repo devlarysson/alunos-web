@@ -28,13 +28,6 @@ $ docker-compose up --build
 Rodando na porta 80
 ```
 
-## Testes
-
-```bash
-# testes unitários
-$ npm run test
-```
-
 [nodejs]: https://nodejs.org/
 [react]: https://pt-br.reactjs.org/
 [docker]: https://www.docker.com/

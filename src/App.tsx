@@ -1,8 +1,9 @@
 import './App.css';
-import { AlunoList } from './pages/AlunoList';
+
+import { Routes } from './routes';
 
 function App() {
-  return <AlunoList></AlunoList>
+  return <Routes />
 }
 
 export default App;
